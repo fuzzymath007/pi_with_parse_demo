@@ -9,45 +9,47 @@
 import UIKit
 import Parse
 
+var lightOn = false
+
 
 class ViewController: UIViewController {
 
     @IBAction func flipLight(sender: AnyObject) {
-        if isLightOn == false{
-            isLightOn = true
-        }else if isLightOn == true{
-            isLightOn = false
+        if lightOn == false{
+            lightOn = true
+            
         }
-        
-        
-        var query = PFQuery(className: "isLightOn")
-        query.getObjectInBackgroundWithId("c7g9BfmrSm", block: { (isLightOn: PFObject!, error:NSError!) -> Void in
-            if error != nil{
-                println(error)
-            }else{
-                isLightOn =
-            }
-        })
 
     }
 
+    var lightOn = 0
+
+
     
-    var isLightOn:Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var query = PFQuery(className: "isLightOn")
-        query.getObjectInBackgroundWithId("c7g9BfmrSm", block: { (isLightOn: PFObject!, error:NSError!) -> Void in
-            if error != nil{
-            println(error)
-            }else{
-            println(isLightOn)
-            }
-        })
-
+        println(lightOn)
         
+        let className = "parseStatus"
+        
+        var query = PFQuery(className:className)
+        var x:PFObject = query.getObjectWithId("cZ23zAwncK")
+        var y: AnyObject! = x["lightStatusParse"]
+        println(y)
+        
+        var tempY:Int = y as Int
+        println(tempY)
+        
+        lightOn = tempY
+        
+        println(lightOn)
+        
+
+
     }
 
     override func didReceiveMemoryWarning() {
